@@ -10,4 +10,4 @@
 
 ## Ranks
 
-- if you have higher wpm than your opponent, you get more complex words to balance
+- if you have higher WPM than your opponent, you get more complex words to balance
