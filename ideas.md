@@ -1,3 +1,5 @@
+# Ideas
+
 ## Achievements
 
     - Keyboard Warrior
