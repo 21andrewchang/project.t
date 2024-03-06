@@ -1,5 +1,9 @@
 # Ideas
 
+## Balancing
+
+- AI for balancing? adjusts damage of abilites
+
 ## Art Style
 
 - Pixel art
@@ -24,3 +28,6 @@
   is trying to stop the combo w/ defensive spell
 - keep players on the stie w/ typing practice
   - typing practice = farming you can level up your abilities (defensive spell blocks more damage etc)
+- classes have different moves/abilities so the combo (word) you type to cast it is different
+  - mage (charge, fireball)
+  - swordsman (jab, slash)
