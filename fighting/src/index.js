@@ -36,6 +36,7 @@ class Sprite {
     this.width = 50;
     this.canJump = true;
     this.isAttacking = false;
+    this.health = 100;
     this.attackBox = {
       position: this.position,
       width: 100,
@@ -121,14 +122,16 @@ function animate() {
   window.requestAnimationFrame(animate);
   clearScreen();
   player.update();
-  player.velocity.x = 0;
   enemy.update();
+  // if you move left then right while holding left and let go of right it keeps going right
   if (keys.f.pressed && lastKey == "f") {
     player.velocity.x = 10;
     player.facing = "right";
   } else if (keys.s.pressed && lastKey == "s") {
     player.velocity.x = -10;
     player.facing = "left";
+  } else if (!keys.f.pressed && !keys.s.pressed) {
+    player.velocity.x = 0;
   }
 
   let p_attack = player.attackBox;
@@ -136,7 +139,10 @@ function animate() {
   if (player.isAttacking) {
     if (player.position.x < enemy.position.x) {
       if (p_attack.position.x + p_attack.width >= enemy.position.x) {
-        console.log("Hit enemy!");
+        // let enemyHP = document.querySelector("#enemyHealth").style.width;
+        // let newHP = enemyHP - 50;
+        enemy.health -= 10;
+        document.querySelector("#enemyHealth").style.width = enemy.health + "%";
         player.isAttacking = false;
       }
     } else {

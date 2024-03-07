@@ -1,0 +1,68 @@
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div style="position: relative; display: inline-block">
+    <div
+      class="container"
+      style="
+        position: absolute;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        padding: 20px;
+      "
+    >
+      <div
+        style="
+          position: relative;
+          height: 30px;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+        "
+      >
+        <div style="background-color: yellow; height: 30px; width: 100%"></div>
+        <div
+          id="playerHealth"
+          style="
+            background-color: blue;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+          "
+        ></div>
+      </div>
+      <div
+        style="
+          background-color: gray;
+          height: 50px;
+          width: 80px;
+          flex-shrink: 0;
+        "
+      ></div>
+      <div style="position: relative; height: 30px; width: 100%">
+        <div style="background-color: yellow; height: 30px"></div>
+        <div
+          id="enemyHealth"
+          style="
+            background-color: red;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          "
+        ></div>
+      </div>
+    </div>
+    <canvas></canvas>
+  </div>
+  <script src="index.js"></script>
+</body>
