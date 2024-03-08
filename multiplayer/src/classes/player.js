@@ -1,13 +1,12 @@
 class Player {
   constructor({ position }) {
     this.position = position;
-    this.width = 50;
-    this.height = 50;
+    this.hp = 100;
   }
 
   draw() {
     c.fillStyle = "white";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    c.fillRect(this.position.x, this.position.y, this.hp, this.hp);
   }
   update() {
     this.draw();
