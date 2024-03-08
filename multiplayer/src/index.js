@@ -1,7 +1,30 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
-canvas.width = 1024;
-canvas.height = 576;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+const players = {};
+
+const socket = io(); //creates connection to backend
+
+//updatePlayers event listener
+socket.on("updatePlayers", (backendPlayers) => {
+  for (const id in backendPlayers) {
+    const backendPlayer = backendPlayers[id];
+
+    if (!players[id]) {
+      players[id] = new Player({
+        position: { x: backendPlayer.x, y: backendPlayer.y },
+      });
+    }
+  }
+  for (const id in players) {
+    if (!backendPlayers[id]) {
+      delete players[id];
+    }
+  }
+  console.log(players);
+});
 
 const keys = {
   w: {
@@ -20,9 +43,6 @@ const keys = {
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-const p1 = new Player({ position: { x: 100, y: 100 } });
-console.log(p1);
-
 function clearScreen() {
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
@@ -30,15 +50,9 @@ function clearScreen() {
 function animate() {
   window.requestAnimationFrame(animate);
   clearScreen();
-  p1.update();
-  if (keys.w.pressed) {
-    p1.position.y -= 5;
-  } else if (keys.a.pressed) {
-    p1.position.x -= 5;
-  } else if (keys.s.pressed) {
-    p1.position.y += 5;
-  } else if (keys.d.pressed) {
-    p1.position.x += 5;
+  for (const id in players) {
+    const player = players[id];
+    player.draw();
   }
 }
 
