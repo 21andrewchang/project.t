@@ -1,6 +1,7 @@
 class Player {
-  constructor({ position, color }) {
-    this.position = position;
+  constructor({ x, y, color }) {
+    this.x = x;
+    this.y = y;
     this.hp = 100;
     this.color = color;
   }
@@ -8,7 +9,7 @@ class Player {
   draw() {
     c.fillStyle = this.color;
     let size = this.hp * devicePixelRatio;
-    c.fillRect(this.position.x, this.position.y, size, size);
+    c.fillRect(this.x, this.y, size, size);
   }
   update() {
     this.draw();

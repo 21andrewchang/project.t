@@ -10,17 +10,25 @@ const frontendPlayers = {};
 
 const socket = io(); //creates connection to backend
 
-window.addEventListener("keydown", (e) => {
-  console.log("socket id:", socket.id);
-  if (!frontendPlayers[socket.id]) return;
-  switch (e.key) {
-    case "w":
-      frontendPlayers[socket.id].position.y -= 10;
-      break;
-    case "s":
-      frontendPlayers[socket.id].position.y += 10;
-      break;
-  }
+socket.on("connect", () => {
+  window.addEventListener("keydown", (e) => {
+    console.log("socket id:", socket.id);
+    if (!frontendPlayers[socket.id]) return;
+    switch (e.key) {
+      case "w":
+        socket.emit("keydown", "w");
+        break;
+      case "a":
+        socket.emit("keydown", "a");
+        break;
+      case "s":
+        socket.emit("keydown", "s");
+        break;
+      case "d":
+        socket.emit("keydown", "d");
+        break;
+    }
+  });
 });
 
 //updatePlayers event listener
@@ -30,9 +38,13 @@ socket.on("updatePlayers", (backendPlayers) => {
 
     if (!frontendPlayers[id]) {
       frontendPlayers[id] = new Player({
-        position: { x: backendPlayer.x, y: backendPlayer.y },
+        x: backendPlayer.x,
+        y: backendPlayer.y,
         color: backendPlayer.color,
       });
+    } else {
+      frontendPlayers[id].x = backendPlayer.x;
+      frontendPlayers[id].y = backendPlayer.y;
     }
   }
   for (const id in frontendPlayers) {
