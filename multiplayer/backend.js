@@ -1,3 +1,4 @@
+//backend shit
 const express = require("express");
 const app = express();
 
@@ -22,7 +23,11 @@ const players = {};
 
 io.on("connection", (socket) => {
   console.log("a user has connected");
-  players[socket.id] = { x: 500 * Math.random(), y: 500 * Math.random() };
+  players[socket.id] = {
+    x: 500 * Math.random(),
+    y: 500 * Math.random(),
+    color: `hsl(${360 * Math.random()}, 100%, 50%)`,
+  };
   //socket.emit() for sending data just to this connection
   io.emit("updatePlayers", players); //send data to all connections
 
