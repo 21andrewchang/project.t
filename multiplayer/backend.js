@@ -31,6 +31,10 @@ io.on("connection", (socket) => {
   //socket.emit() for sending data just to this connection
   io.emit("updatePlayers", backendPlayers); //send data to all connections
 
+  socket.on("message", (message) => {
+    backendPlayers[socket.id].message = message;
+  });
+
   socket.on("keydown", (keyPressed) => {
     console.log("backend socket", socket.id);
     console.log("backendPlayer", backendPlayers[socket.id]);

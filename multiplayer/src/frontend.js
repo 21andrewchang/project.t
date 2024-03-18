@@ -28,7 +28,8 @@ socket.on("connect", () => {
     if (typing) {
       switch (e.key) {
         case "Enter":
-          socket.emit("sendMessage", message);
+          console.log("message: ", textbox.value || "");
+          socket.emit("message", textbox.value || "");
           break;
       }
     } else {
@@ -60,10 +61,12 @@ socket.on("updatePlayers", (backendPlayers) => {
         x: backendPlayer.x,
         y: backendPlayer.y,
         color: backendPlayer.color,
+        message: backendPlayer.message,
       });
     } else {
       frontendPlayers[id].x = backendPlayer.x;
       frontendPlayers[id].y = backendPlayer.y;
+      frontendPlayers[id].message = backendPlayer.message;
     }
   }
   for (const id in frontendPlayers) {
