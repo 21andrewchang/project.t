@@ -4,6 +4,7 @@ class Player {
     this.y = y;
     this.hp = 100;
     this.color = color;
+    this.message = "";
   }
 
   draw() {

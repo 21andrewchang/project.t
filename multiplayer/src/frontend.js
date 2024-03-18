@@ -2,6 +2,18 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 const devicePixelRatio = window.devicePixelRatio || 1;
+const textbox = document.getElementById("textbox");
+let typing = false;
+// Check if the user is using the chat input
+// If so, disable game input
+function checkPageFocus() {
+  if (document.activeElement === textbox) {
+    typing = true;
+  } else {
+    typing = false;
+  }
+}
+setInterval(checkPageFocus, 10);
 
 canvas.width = innerWidth * devicePixelRatio;
 canvas.height = innerHeight * devicePixelRatio;
@@ -12,21 +24,28 @@ const socket = io(); //creates connection to backend
 
 socket.on("connect", () => {
   window.addEventListener("keydown", (e) => {
-    console.log("socket id:", socket.id);
     if (!frontendPlayers[socket.id]) return;
-    switch (e.key) {
-      case "w":
-        socket.emit("keydown", "w");
-        break;
-      case "a":
-        socket.emit("keydown", "a");
-        break;
-      case "s":
-        socket.emit("keydown", "s");
-        break;
-      case "d":
-        socket.emit("keydown", "d");
-        break;
+    if (typing) {
+      switch (e.key) {
+        case "Enter":
+          socket.emit("sendMessage", message);
+          break;
+      }
+    } else {
+      switch (e.key) {
+        case "w":
+          socket.emit("keydown", "w");
+          break;
+        case "a":
+          socket.emit("keydown", "a");
+          break;
+        case "s":
+          socket.emit("keydown", "s");
+          break;
+        case "d":
+          socket.emit("keydown", "d");
+          break;
+      }
     }
   });
 });
