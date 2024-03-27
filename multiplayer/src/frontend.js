@@ -3,6 +3,7 @@ const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 const devicePixelRatio = window.devicePixelRatio || 1;
 const textbox = document.getElementById("textbox");
+
 let typing = false;
 // Check if the user is using the chat input
 // If so, disable game input
